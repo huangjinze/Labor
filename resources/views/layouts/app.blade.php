@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>应用名称 - @yield('title')</title>
+    <title>{{$company->name}}</title>
     <!--mobile apps-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,6 +12,7 @@
     <!--Custom Theme files-->
     <link href="{{asset('Front_css/bootstrap.css')}}" type="text/css" rel="stylesheet" media="all">
     <link href="{{asset('Front_css/style.css')}}" type="text/css" rel="stylesheet" media="all">
+    @yield('css')
     <!-- //Custom Theme files -->
     <!-- js -->
     <script src="{{asset('Front_js/jquery-1.11.1.min.js')}}"></script>
@@ -30,25 +31,49 @@
         });
     </script>
     <!--//end-smooth-scrolling-->
-    @yield('css')
+
 </head>
 <body>
 @section('sidebar')
     <nav class="open">
-        <a href="/" id="menuToggle"></a>
+        <a href="/" id="menuToggle"> <span class="navClosed"></span> </a>
         <a href="/">首页</a>
-        <a href="/about">公司简介</a>
-        <a href="typo.html">劳务派遣</a>
-        <a href="#news" class="scroll">人力资源服务</a>
-        <a href="gallery.html">劳务外包</a>
-        <a href="contact.html">政策法规</a>
-        <a href="contact.html">党群工作建设</a>
-        <a href="contact.html">招聘信息</a>
-        <a href="contact.html">服务动态</a>
-        <a href="contact.html">资料下载</a>
+        <a href="/company">公司简介</a>
+        <a href="/lwpq">劳务派遣</a>
+        <a href="/rlzy">人力资源服务</a>
+        <a href="/lwwb">劳务外包</a>
+        <a href="/zcfg">政策法规</a>
+        <a href="/gzjs">党群工作建设</a>
+        <a href="/zpxx">招聘信息</a>
+        <a href="/fwdt">服务动态</a>
+        <a href="/zlxz">资料下载</a>
         <a href="#contact-us" class="scroll">联系我们</a>
+        <a href="/admin">登录</a>
     </nav>
+    <script>
+        (function($){
+            // Menu Functions
+            $(document).ready(function(){
+                $('#menuToggle').click(function(e){
+                    var $parent = $(this).parent('nav');
+                    $parent.toggleClass("open");
+                    var navState = $parent.hasClass('open') ? "hide" : "show";
+                    $(this).attr("title", navState + " navigation");
+                    // Set the timeout to the animation length in the CSS.
+                    setTimeout(function(){
+                        console.log("timeout set");
+                        $('#menuToggle > span').toggleClass("navClosed").toggleClass("navOpen");
+                    }, 200);
+                    e.preventDefault();
+                });
+            });
+        })(jQuery);
+    </script>
 @show
+
+
+@yield('header')
+
 
 @yield('content')
 
@@ -58,43 +83,34 @@
     <div class="footer" id="contact-us">
         <div class="container">
             <div class="col-md-4 footer-grids">
-                <h3>Review</h3>
-                <p>As opposed to using 'Content here, making it look like readable English. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                    software like Aldus PageMaker including versions of content here',  Lorem Ipsum The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here.</p>
+                <h3>公司二维码</h3>
+                <img src="{{asset('uploads/'.$company->image.'')}}" height="200px" width="200px" alt=""/>
+            </div>
+            <div class="col-md-2 footer-grids">
+                <h3>联系我们</h3>
+                <p>
+                    <span>座机电话: {{$company->phone}}</span>
+                    <span>办公电话: {{$company->telephone}}</span>
+                    <span>邮箱: <a href="mailto:info@example.com">{{$company->mail}}</a></span>
+                </p>
             </div>
             <div class="col-md-3 footer-grids">
-                <h3>Contact Me</h3>
-                <p>123 NewYork City USA.<br>
-                    <span>Office: 908-0000</span>
-                    <span>Support to: <a href="mailto:info@example.com">mail@example.com</a></span>
-                </p>
+                <h3>公司地址</h3>
+                <p>{{$company->address}}<br></p>
                 <div class="footer-bottom">
-                    <h3>Follow Us</h3>
-                    <ul>
-                        <li><a href="#"><img src="images/f1.png" alt=""> FACEBOOK</a></li>
-                        <li><a href="#"><img src="images/f2.png" alt=""> GOOGLE+</a></li>
-                        <li><a href="#"><img src="images/f3.png" alt=""> LINKEDIN</a></li>
-                        <li><a href="#"><img src="images/f4.png" alt=""> TWITTER</a></li>
-                    </ul>
+                    <h3>{{$company->charger}} 女士</h3>
                 </div>
             </div>
-            <div class="col-md-5 footer-grids">
-                <h3>Subscribe</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-                <form>
-                    <input type="text" placeholder="Enter your email" required="">
-                    <input type="submit" value="">
-                </form>
-                <div class="footer-bottom">
-                    <h3>Flickr</h3>
-                    <a  class="footer-img" href="#"> <img src="images/img7.jpg" alt=""/></a>
-                    <a class="footer-img" href="#"> <img src="images/img1.jpg" alt=""/></a>
-                    <a class="footer-img" href="#"> <img src="images/img8.jpg" alt=""/></a>
-                </div>
+            <div class="col-md-3 footer-grids">
+                <h3>友情链接</h3>
+                <a href="http://www.mohrss.gov.cn/">中华人民共和国人力资源和社会保障网</a><br><br>
+                <a href="http://www.ynhrss.gov.cn/">云南省人力资源和社会保障网</a><br><br>
+                <a href="http://rsj.km.gov.cn/">昆明市人力资源和社会保障网</a><br><br>
+                <a href="http://pl.km.gov.cn/qsbmsz/qzfgbm/qrsj/">盘龙区人力资源和社会保障局</a><br><br>
             </div>
             <div class="clearfix"> </div>
             <div class="footer-copy">
-                <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                <p>Copyright &copy; 2018<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">京公网安备11000002000001号</a></p>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name' => 'Laravel-admin',
+    'name' => '云南悦齐劳务有限公司后台管理',
 
     /*
      * Logo in admin panel header.
@@ -69,10 +69,11 @@ return [
     'upload' => [
 
         'disk' => 'admin',
-
+        'storage' => 'local',
         'directory' => [
             'image' => 'images',
             'file'  => 'files',
+            'webpath'  => env('APP_URL').'/public/uploads',
         ],
     ],
 
@@ -140,7 +141,7 @@ return [
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
      */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    'layout' => ['sidebar-mini'],
 
     /*
      * Version displayed in footer.
@@ -151,6 +152,8 @@ return [
      * Settings for extensions.
      */
     'extensions' => [
-
+        'media-manager' => [
+            'disk' => 'admin'   // 指向config/filesystem.php中设置的disk
+        ],
     ],
 ];

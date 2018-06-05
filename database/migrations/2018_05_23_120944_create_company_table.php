@@ -22,8 +22,9 @@ class CreateCompanyTable extends Migration
             $table->string('phone');
             $table->string('charger');
             $table->string('mail');
-            $table->string('logo');
-            $table->string('image');
+            $table->string('logo')->nullable();
+            $table->string('image')->nullable();
+            $table->text('content');
             $table->timestamps();
         });
     }

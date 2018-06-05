@@ -11,7 +11,17 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->resource('about', 'CompanyController');
-    $router->resource('article', 'ArticleController');
+    $router->resource('/lwpq', 'LwpqController');
+    $router->resource('/rlzy', 'RlzyController');
+    $router->resource('/lwwb', 'LwwbController');
+    $router->resource('/zcfg', 'ZcfgController');
+    $router->resource('/gzjs', 'GzjsController');
+    $router->resource('/zpxx', 'ZpxxController');
+    $router->resource('/fwdt', 'FwdtController');
+    $router->resource('/about', 'CompanyController');
+
 });
+
+
+
 
