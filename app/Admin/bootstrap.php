@@ -19,6 +19,13 @@
  */
 use App\Admin\Extensions\WangEditor;
 use Encore\Admin\Form;
+use Encore\Admin\Facades\Admin;
 
 Form::extend('editor', WangEditor::class);
 Encore\Admin\Form::forget(['map']);
+
+Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
+
+    $navbar->left(view('admin.returnHome'));
+
+});

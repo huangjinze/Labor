@@ -8,12 +8,14 @@
 @section('sidebar')
 	@parent
 @endsection
-
-<div class="testimonials">
-	<div class="container">
-		<h3 class="title">人力资源服务</h3>
+@section('header')
+	<div class="testimonials" style="background: url('{{asset('images/rlzy-header.jpg')}}') no-repeat 0px 0px fixed;">
+		<div class="container">
+			<h3 class="title">人力资源服务</h3>
+		</div>
 	</div>
-</div>
+@endsection
+
 
 @section('content')
 	<!--news-->

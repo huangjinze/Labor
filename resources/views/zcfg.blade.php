@@ -10,9 +10,9 @@
 @endsection
 
 @section('header')
-	<div class="testimonials">
+	<div class="testimonials" style="background: url('{{asset('images/zcfg-header.jpg')}}') no-repeat 0px 0px fixed;">
 		<div class="container">
-			<h3 class="title">政策法规</h3>
+			<h3 class="title" style="color: black">政策法规</h3>
 		</div>
 	</div>
 @endsection

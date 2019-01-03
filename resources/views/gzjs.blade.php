@@ -10,7 +10,7 @@
 @endsection
 
 @section('header')
-	<div class="testimonials">
+	<div class="testimonials" style="background: url('{{asset('images/gzjs-header.jpg')}}') no-repeat 0px 0px fixed;">
 		<div class="container">
 			<h3 class="title">党群工作建设</h3>
 		</div>

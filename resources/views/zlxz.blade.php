@@ -18,9 +18,9 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
 @section('header')
-	<div class="testimonials">
+	<div class="testimonials" style="background: url('{{asset('images/zlxz-header.jpg')}}') no-repeat 0px 0px fixed;">
 		<div class="container">
-			<h3 class="title">资料下载</h3>
+			<h3 class="title" style="color: saddlebrown;">资料下载</h3>
 		</div>
 	</div>
 @endsection

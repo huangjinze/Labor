@@ -11,33 +11,42 @@
 |
 */
 Route::get('/', 'CompanyController@home');
-Route::get('/test', function(){
-    return 'yey2dd';
-});
 
-Route::get('/company', 'CompanyController@index');
+
+Route::get('/company', 'CompanyController@show');
 Route::get('/company/{id}', 'CompanyController@show');
 
-Route::get('/lwpq', 'LwpqController@index');
-Route::get('/lwpq/{id}', 'LwpqController@show');
+//服务动态Fwdt->咨询中心 zxzx
+Route::get('/zxzx', 'ZxzxController@index');
+Route::get('/zxzx/{id}', 'ZxzxController@show');
 
-Route::get('/rlzy', 'RlzyController@index');
-Route::get('/rlzy/{id}', 'RlzyController@show');
+//劳务派遣Lwpq->服务项目 fwxm
+Route::get('/fwxm', 'FwxmController@index');
+Route::get('/fwxm/{id}', 'FwxmController@show');
 
-Route::get('/lwwb', 'LwwbController@index');
-Route::get('/lwwb/{id}', 'LwwbController@show');
+//人力资源 rlzy->经典案例 jdal
+Route::get('/jdal', 'JdalController@index');
+Route::get('/jdal/{id}', 'JdalController@show');
 
-Route::get('/zcfg', 'ZcfgController@index');
-Route::get('/zcfg/{id}', 'ZcfgController@show');
+//劳务外包 lwwb->企业资质 qyzz
+Route::get('/qyzz', 'QyzzController@index');
 
-Route::get('/gzjs', 'GzjsController@index');
-Route::get('/gzjs/{id}', 'GzjsController@show');
+//政策法规 zcfg->党群建设 dqjs
+Route::get('/dqjs', 'DqjsController@index');
+Route::get('/dqjs/{id}', 'DqjsController@show');
+
+//gzjs -> 企业招聘 qyzp
+Route::get('/qyzp', 'QyzpController@index');
+Route::get('/qyzp/{id}', 'QyzpController@show');
+
+
+Route::get('/about', 'CompanyController@about');
+
 
 Route::get('/zpxx', 'ZpxxController@index');
 Route::get('/zpxx/{id}', 'ZpxxController@show');
 
-Route::get('/fwdt', 'FwdtController@index');
-Route::get('/fwdt/{id}', 'FwdtController@show');
+
 
 Route::get('/zlxz', 'ZlxzController@index');
 Route::get('/download/{filename}', 'ZlxzController@download');

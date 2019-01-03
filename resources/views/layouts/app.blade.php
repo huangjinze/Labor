@@ -1,119 +1,246 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 <head>
-    <title>{{$company->name}}</title>
-    <!--mobile apps-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Expedition Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!--//mobile apps-->
-    <!--Custom Theme files-->
-    <link href="{{asset('Front_css/bootstrap.css')}}" type="text/css" rel="stylesheet" media="all">
-    <link href="{{asset('Front_css/style.css')}}" type="text/css" rel="stylesheet" media="all">
+    <meta charset="utf-8">
+    <title>{{$common_data['company']->name}}</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="{{assert('images/favicon.gif')}}"/>
+    <link rel="stylesheet" href="{{asset('Front_css/style.css')}}" media="screen"/><!-- MAIN STYLE CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/responsive.css')}}" media="screen"/><!-- RESPONSIVE CSS FILE -->
+    <link rel="stylesheet" id="style-color" href="{{asset('Front_css/colors/blue-color.css')}}" media="screen"/><!-- DEFAULT BLUE COLOR CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/prettyPhoto.css')}}" media="screen"/><!--PRETTYPHOTO CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/font-awesome/font-awesome.min.css')}}" media="screen"/><!-- FONT AWESOME ICONS CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/layer-slider.css')}}" media="screen"/><!-- LAYER SLIDER CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/flexslider.css')}}" media="screen"/><!-- FLEX SLIDER CSS FILE -->
+    <link rel="stylesheet" href="{{asset('Front_css/revolution-slider.css')}}" media="screen"/><!-- REVOLUTION SLIDER CSS FILE -->
     @yield('css')
-    <!-- //Custom Theme files -->
-    <!-- js -->
-    <script src="{{asset('Front_js/jquery-1.11.1.min.js')}}"></script>
-    <!-- //js -->
-    <!--web-fonts-->
-    <link href='https://fonts.googleapis.com/css?family=Nova+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <!--//web-fonts-->
-    <!-- start-smooth-scrolling-->
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $(".scroll").click(function(event){
-                event.preventDefault();
-                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-            });
-        });
+
+    <!-- All JavaScript Files (FOR FASTER LOADING OF YOUR SITE, REMOVE ALL JS PLUGINS YOU WILL NOT USE)-->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.min.js')}}"></script><!-- JQUERY JS FILE -->
+    <script>
+        function showCompanyName(){
+            if(jQuery(window).width()<720){
+                jQuery("#logo").append("<img src=\"{{asset('images/companyNameMoblie.png')}}\" alt=\"\"/>")
+            }
+            else{
+                jQuery("#logo").append("<img src=\"{{asset('images/companyName.png')}}\" alt=\"\"/>")
+            }
+        }
     </script>
-    <!--//end-smooth-scrolling-->
+    <script type="text/javascript" src="{{asset('Front_js/jquery-ui.js')}}"></script><!-- JQUERY UI JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/flex-slider.min.js')}}"></script><!-- FLEX SLIDER JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/navigation.min.js')}}"></script><!-- MAIN NAVIGATION JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.layerslider.js')}}"></script><!-- LAYER SLIDER JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/layerslider.transitions.js')}}"></script><!-- LAYER SLIDER TRANSITIONS JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/carousel.js')}}"></script><!-- CAROUSEL SLIDER JS -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.theme.plugins.min.js')}}"></script><!-- REVOLUTION SLIDER PLUGINS JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.themepunch.revolution.min.js')}}"></script><!-- REVOLUTION SLIDER JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/flickr.js')}}"></script><!-- FLICKR WIDGET JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/instagram.js')}}"></script><!-- INSTAGRAM WIDGET JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.twitter.js')}}"></script><!--TWITTER WIDGET JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/prettyPhoto.min.js')}}"></script><!-- PRETTYPHOTO JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.tooltips.min.js')}}"></script><!-- TOOLTIPS JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/isotope.min.js')}}"></script><!--ISOTOPE JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/scrolltopcontrol.js')}}"></script><!-- SCROLL TO TOP JS PLUGIN -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.easy-pie-chart.js')}}"></script><!-- EASY PIE JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/jquery.transit.min.js')}}"></script><!-- TRANSITION JS FILE -->
+    <script type="text/javascript" src="{{asset('Front_js/custom.js')}}"></script><!-- CUSTOM JAVASCRIPT JS FILE -->
+    @yield('JavaScript')
+
 
 </head>
+
 <body>
-@section('sidebar')
-    <nav class="open">
-        <a href="/" id="menuToggle"> <span class="navClosed"></span> </a>
-        <a href="/">首页</a>
-        <a href="/company">公司简介</a>
-        <a href="/lwpq">劳务派遣</a>
-        <a href="/rlzy">人力资源服务</a>
-        <a href="/lwwb">劳务外包</a>
-        <a href="/zcfg">政策法规</a>
-        <a href="/gzjs">党群工作建设</a>
-        <a href="/zpxx">招聘信息</a>
-        <a href="/fwdt">服务动态</a>
-        <a href="/zlxz">资料下载</a>
-        <a href="#contact-us" class="scroll">联系我们</a>
-        <a href="/admin">登录</a>
-    </nav>
-    <script>
-        (function($){
-            // Menu Functions
-            $(document).ready(function(){
-                $('#menuToggle').click(function(e){
-                    var $parent = $(this).parent('nav');
-                    $parent.toggleClass("open");
-                    var navState = $parent.hasClass('open') ? "hide" : "show";
-                    $(this).attr("title", navState + " navigation");
-                    // Set the timeout to the animation length in the CSS.
-                    setTimeout(function(){
-                        console.log("timeout set");
-                        $('#menuToggle > span').toggleClass("navClosed").toggleClass("navOpen");
-                    }, 200);
-                    e.preventDefault();
-                });
-            });
-        })(jQuery);
-    </script>
-@show
+<div id="container">
+    <!-- main container starts-->
+    <div id="wrapp">
+        @section('header')
+            <!-- main wrapp starts-->
+            <header id="header">
+                    <!--header starts -->
+                    <div id="header-links">
 
+                    </div>
+                    <div class="container">
+                        <div class="head-wrapp" style="width: 130%">
+                            <a href="/" id="logo">
+                                {{--<span>Responsive Business Template</span>--}}
+                            </a>
+                            <script>
+                                jQuery(function () {
+                                    showCompanyName();
 
-@yield('header')
+                                    jQuery(function () {
+                                        //当调整浏览器窗口的大小时，发生 resize 事件
+                                        jQuery(window).resize(function(){
+                                            jQuery("#logo img").remove();
+                                            showCompanyName();
+                                        })
+                                    })
+                                })
+                            </script>
 
+                            <!--your logo-->
+                            <a href="/" id="imageInfo" style="float: right;">
+                                <img src="{{asset('images/contactinfo.png')}}" alt=""/>
+                            </a>
+                            
+                            <nav class="top-search" style="margin-right: 6%">
+                                <!-- search starts-->
+                                <form action="404-error.html" method="get">
+                                    <button class="search-btn"></button>
+                                    <input class="search-field" type="text" onblur="if(this.value=='')this.value='Search';" onfocus="if(this.value=='Search')this.value='';" value="Search"/>
+                                </form>
+                            </nav>
+                            <!--search ends -->
 
-@yield('content')
+                        </div>
+                    </div>
+                    <div id="main-navigation">
+                        <!--main navigation wrapper starts -->
+                        <div class="container">
+                            <ul class="main-menu">
+                                <li>
+                                    <a href="/"> 网站首页</a>
+                                </li>
+                                <li>
+                                    <a href="/company"> 公司简介</a>
+                                </li>
 
-@yield('scripts')
+                                <li><a href="/zxzx"> 资讯中心</a>
+                                    <!-- Second Level / Start -->
+                                    <ul>
+                                        <li><a href="/zxzx?type=公司新闻">公司新闻</a></li>
+                                        <li><a href="/zxzx?type=行业新闻">行业新闻</a></li>
+                                    </ul>
+                                    <!-- Second Level / End -->
+                                </li>
+                                <li>
+                                    <a href="/fwxm"> 服务项目</a>
+                                </li>
+                                <!-- Second Level / End -->
+                                <li>
+                                    <a href="/jdal"> 经典案例</a>
+                                </li>
+                                <li>
+                                    <a href="/qyzz"> 企业资质</a>
+                                </li>
+                                <li>
+                                    <a href="/dqjs#"> 党群建设</a>
+                                </li>
 
-@section('footer')
-    <div class="footer" id="contact-us">
-        <div class="container">
-            <div class="col-md-4 footer-grids">
-                <h3>公司二维码</h3>
-                <img src="{{asset('uploads/'.$company->image.'')}}" height="200px" width="200px" alt=""/>
-            </div>
-            <div class="col-md-2 footer-grids">
-                <h3>联系我们</h3>
-                <p>
-                    <span>座机电话: {{$company->phone}}</span>
-                    <span>办公电话: {{$company->telephone}}</span>
-                    <span>邮箱: <a href="mailto:info@example.com">{{$company->mail}}</a></span>
-                </p>
-            </div>
-            <div class="col-md-3 footer-grids">
-                <h3>公司地址</h3>
-                <p>{{$company->address}}<br></p>
-                <div class="footer-bottom">
-                    <h3>{{$company->charger}} 女士</h3>
+                                <li>
+                                    <a href="/qyzp"> 企业招聘</a>
+                                </li>
+                                <li>
+                                    <a href="/about"> 联系我们</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--main navigation wrapper ends -->
+                </header>
+            <!-- header ends-->
+        @show
+
+        @section('layerslider')
+            <div class="revolution-slider">
+                    <div class="fullwidthbanner-container">
+                        <div class="fullwidthbanner">
+                            <ul>
+                                @for($i=0; $i<$common_data['picture_num']; $i++)
+                                    <li data-transition="random" data-slotamount="7" data-masterspeed="1000">
+                                        <img src="{{asset('uploads/HomePage/bg'.($i+1).'.jpg')}}" alt="slide" data-fullwidthcentering="true">
+                                    </li>
+                                @endfor
+
+                                {{--<li data-transition="random" data-slotamount="7" data-masterspeed="1000">--}}
+                                    {{--<img src="{{asset('images/slider/revolution/2/bg.jpg')}}" alt="slide" data-fullwidthcentering="true">--}}
+                                {{--</li>--}}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 footer-grids">
-                <h3>友情链接</h3>
-                <a href="http://www.mohrss.gov.cn/">中华人民共和国人力资源和社会保障网</a><br><br>
-                <a href="http://www.ynhrss.gov.cn/">云南省人力资源和社会保障网</a><br><br>
-                <a href="http://rsj.km.gov.cn/">昆明市人力资源和社会保障网</a><br><br>
-                <a href="http://pl.km.gov.cn/qsbmsz/qzfgbm/qrsj/">盘龙区人力资源和社会保障局</a><br><br>
-            </div>
-            <div class="clearfix"> </div>
-            <div class="footer-copy">
-                <p>Copyright &copy; 2018<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">京公网安备11000002000001号</a></p>
-            </div>
-        </div>
+            <!--layer slider ends-->
+        @show
+
+
+
+        @yield('content')
+
+
+        @section('footer')
+            <section class="footer-call-to-action" style="padding: 10px 0 10px 0;"><!-- footer call to action starts -->
+                <section class="container" style="text-align: center">
+                    <a href="/" class="button small round color-alt"><i class="icon-windows left"></i>网站首页</a>
+                    <a href="/company" class="button small round color-alt"><i class="icon-file-text left"></i>公司简介</a>
+                    <a href="/zxzx" class="button small round color-alt"><i class="icon-question left"></i>咨询中心</a>
+                    <a href="/fwxm" class="button small round color-alt"><i class="icon-list-ol left"></i>服务项目</a>
+                    <a href="/jdal" class="button small round color-alt"><i class="icon-check-sign left"></i>经典案例</a>
+                    <a href="/qyzz" class="button small round color-alt"><i class="icon-bullhorn left"></i>企业资质</a>
+                    <a href="/dqjs" class="button small round color-alt"><i class="icon-flag left"></i>党群建设</a>
+                    <a href="/qyzp" class="button small round color-alt"><i class="icon-smile left"></i>企业招聘</a>
+                </section>
+            </section><!-- footer call to action ends -->
+            <footer id="footer"><!--footer starts -->
+                <section class="container">
+                    <section class="one-third">
+                        {{--<h4>Twitter Feeds</h4>--}}
+                        {{--<ul class="twitter-feeds">--}}
+                            {{--<!-- twitter widget starts-->--}}
+                        {{--</ul>--}}
+                        {{--<!-- twitter widget ends-->--}}
+                        {{--<p>--}}
+                            {{--<a href="#">Follow Me on Twitter</a>--}}
+                        {{--</p>--}}
+                    </section>
+                    <section class="one-third">
+                        <h4>友情链接</h4>
+                        <ul>
+                            <!-- latest posts widget starts-->
+                            <li><a href="http://www.mohrss.gov.cn/">中华人民共和国人力资源和社会保障网</a></li>
+                            <li><a href="http://www.ynhrss.gov.cn/">云南省人力资源和社会保障网</a></li>
+                            <li><a href="http://rsj.km.gov.cn/">昆明市人力资源和社会保障网</a></li>
+                            <li><a href="http://pl.km.gov.cn/qsbmsz/qzfgbm/qrsj/">盘龙区人力资源和社会保障局</a></li>
+                        </ul>
+                        <!-- lastest posts widget ends-->
+                    </section>
+                    {{--<section class="one-third">--}}
+                        {{--<h4>Flickr Photos</h4>--}}
+                        {{--<div class="flickr-widget">--}}
+                            {{--<!-- flickr widget starts-->--}}
+                        {{--</div>--}}
+                    {{--</section>--}}
+                </section>
+            </footer>
+        @show
+
+        @section('copyright')
+            <section id="copyrights">
+                <section class="container">
+                    <div class="one-half">
+                        <p>
+                            Copyright &copy;
+                            <a href="http://www.yqlwyn.com/" target="_blank">云南悦齐劳务有限公司</a>
+                        </p>
+                    </div>
+                    <div class="one-half">
+                        <ul class="copyright_links">
+                            <li><a href="/" title="Home">主页</a></li>
+                            <li><a href="/about" title="About">关于我们</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+        @show
     </div>
-@show
+    <!-- main wrapp starts-->
+</div>
+<!-- main container ends-->
+
 </body>
 </html>

@@ -12,7 +12,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Models\fwdt::class, function (Faker $faker) {
+$factory->define(App\Models\zxzx::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,
@@ -20,7 +20,7 @@ $factory->define(App\Models\fwdt::class, function (Faker $faker) {
         'title' => str_random(10),
         'content' => str_random(20),
     ];
-});$factory->define(App\Models\gzjs::class, function (Faker $faker) {
+});$factory->define(App\Models\qyzp::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,
@@ -28,7 +28,7 @@ $factory->define(App\Models\fwdt::class, function (Faker $faker) {
         'title' => str_random(10),
         'content' => str_random(20),
     ];
-});$factory->define(App\Models\lwwb::class, function (Faker $faker) {
+});$factory->define(App\Models\qyzz::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,
@@ -36,7 +36,7 @@ $factory->define(App\Models\fwdt::class, function (Faker $faker) {
         'title' => str_random(10),
         'content' => str_random(20),
     ];
-});$factory->define(App\Models\lwpq::class, function (Faker $faker) {
+});$factory->define(App\Models\fwxm::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,
@@ -44,7 +44,7 @@ $factory->define(App\Models\fwdt::class, function (Faker $faker) {
         'title' => str_random(10),
         'content' => str_random(20),
     ];
-});$factory->define(App\Models\rlzy::class, function (Faker $faker) {
+});$factory->define(App\Models\jdal::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,
@@ -53,7 +53,7 @@ $factory->define(App\Models\fwdt::class, function (Faker $faker) {
         'content' => str_random(20),
     ];
 });
-$factory->define(App\Models\zcfg::class, function (Faker $faker) {
+$factory->define(App\Models\dqjs::class, function (Faker $faker) {
     return [
         'author' => str_random(10),
         'view_num' => 5,

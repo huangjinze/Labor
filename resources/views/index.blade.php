@@ -1,352 +1,206 @@
+
 @extends('layouts.app')
 
-@section('sidebar')
-	@parent
+@section('header')
+    @parent
 @endsection
 
-@section('header')
-
+@section('layerslider')
+    @parent
 @endsection
 
 @section('content')
-<style>
-	.trip-text {
-		font-family:"Times New Roman", Times, serif;
-		font-size: 20px;
-	}
-</style>
-	<!--banner-->
-	<div class="banner" id="home">
-		<div class="banner-left">
-			<div class="logo">
-				<h1><a href="/">{{$company->name}}</a></h1>
-				<h2><img src="{{asset('uploads/'.$company->logo.'')}}" height="50" width="50" alt=""/> {{$company->en_name}}</h2>
-				<div class="address">
-					<p>{{$company->address}}</p>
-					<p>E-mail: <a href="mailto:info@example.com">{{$company->mail}}</a></p>
-					<p class="phn"><span class="glyphicon glyphicon-earphone"></span>{{$company->phone}}</p>
-					<p class="phn"><span class="glyphicon glyphicon-earphone"></span>{{$company->telephone}}</p>
-				</div>
-				<a class="book hvr-outline-out scroll" href="#contact-us" > 联系我们 !</a>
-			</div>
-		</div>
-		<div class="banner-right">
-			<!--banner Slider starts Here-->
-			<script src="{{asset('Front_js/responsiveslides.min.js')}}"></script>
-			<script>
-				// You can also use "$(window).load(function() {"
-				$(function () {
-				  // Slideshow 3
-				  $("#slider3").responsiveSlides({
-					auto: true,
-					pager: true,
-					nav: false,
-					speed: 500,
-					namespace: "callbacks",
-					before: function () {
-					  $('.events').append("<li>before event fired.</li>");
-					},
-					after: function () {
-					  $('.events').append("<li>after event fired.</li>");
-					}
-				  });
+    <div id="content">
+        <div class="home-intro"><!-- home intro starts -->
+            <div class="container">
 
-				});
-			</script>
-			<!--//End-slider-script-->
-			<div  id="top" class="callbacks_container">
-				<ul class="rslides" id="slider3">
-					<li>
-						<div class="banner-image">
-						</div>
-					</li>
-					<li>
-						<div class="banner-image banner-image1">
-						</div>
-					</li>
-					<li>
-						<div class="banner-image banner-image2">
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-	<!--//banner-->
-	<!--banner-bottom-->
-	<div class="banner-bottom">
-		<div class="container">
-			<h3 class="title">劳务派遣</h3>
-			<div class="banner-bottom-grids">
-				@for($i=0; $i<count($Data['lwpq']); $i++)
-				<div class="col-md-2 banner-bottom-grid">
-					<div class="banner-bottom-grid-rel">
-						<p class="welcome-bg-text">0.{{$i+1}}</p>
-						<div class="banner-bottom-grid-rel-pos">
-							<a class="trip-text" href="/lwpq/{{$Data['lwpq'][$i]->id}}">{{$Data['lwpq'][$i]->title}}</a>
-							<p>{{$Data['lwpq'][$i]->author}}</p>
-							<p>{{$Data['lwpq'][$i]->created_at}}</p>
-						</div>
-					</div>
-				</div>
-				@endfor
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!--//banner-bottom-->
-	<!--trip-->
-	<div class="trip">
-		<div class="container">	
-			<h3 class="title">人力资源服务</h3>
-			<div class="trip-info">
-				@for($i=0; $i<count($Data['rlzy']); $i++)
-					<div class="col-md-2 trip-left">
-						<a class="trip-text" href="/rlzy/{{$Data['rlzy'][$i]->id}}">{{$Data['rlzy'][$i]->title}}</a>
-						<p>{{$Data['rlzy'][$i]->author}}</p>
-						<img src="{{asset(''.$Data['rlzy'][$i]->cover.'')}}" height="100" width="100" alt=""/>
-					</div>
-				@endfor
-				<div class="col-md-3 trip-right">
-					<div class="border">
-						<img src="{{asset('images/img1.jpg')}}" alt=""/>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!--//about-grid-->
-	<!--news-->
-	<div class="news-events" id="news">
-		<div class="container">
-			<h3 class="title">劳务外包</h3>
-			<div class="latest-news">
-				<div class="latest-news-grids">
-					@for($i=0; $i<count($Data['lwwb']); $i++)
-						<div class="col-md-6 latest-news-grid">
-							<div class="col-xs-5 latest-news-grid-left">
-								<img src="{{asset('uploads/'.$Data['lwwb'][$i]->cover.'')}}" alt=" " class="img-responsive">
-							</div>
-							<div class="col-xs-7 latest-news-grid-right">
-								<p><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
-									<span>{{$Data['lwwb'][$i]->created_at}}</span>
-								</p>
-								<h4>
-									<a class="trip-text" href="/lwwb/{{$Data['lwwb'][$i]->id}}">{{$Data['lwwb'][$i]->title}}</a>
-								</h4>
-								<p class="man">{{$Data['lwwb'][$i]->author}}</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						@if(($i+1)%2==0)
-							<div class="clearfix"> </div>
-						@endif
-					@endfor
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--//news-->
-	<!--services-->
-	<div class="services">
-		<div class="container">
-			<h3 class="title">政策法规</h3>
-			<div class="col-md-5 services-info">
-				<h5>劳动关系是劳动者与用人单位之间依法建立起的一种权利与义务的关系。依照劳动关系认定原则进行的劳动关系认定结果直接影响者劳动的切身利益，所以劳动关系的认定对劳动者意义重大。</h5>
-				<div class="services-grid">
-					<div class="border">
-						<img src="{{asset('images/index_zcfg.jpg')}}" height="300" width="300" alt=""/>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-7 services-grids">
-				@for($i=0; $i<count($Data['zcfg']); $i++)
-					@if($i%2==0)
-						<div class="services-grids-top">
-					@endif
-						<div class="col-md-6 service-box">
-							<figure class="icon">
-								@if(($i+1)%4==0)
-								<span class="glyphicon glyphicon-plane"></span>
-								@elseif(($i+1)%3==0)
-								<span class="glyphicon glyphicon-picture"></span>
-								@elseif(($i+1)%2==0)
-								<span class="glyphicon glyphicon-home"></span>
-								@else
-								<span class="glyphicon glyphicon-heart"></span>
-								@endif
-							</figure>
-							<h5>
-								<a class="trip-text" href="/zcfg/{{$Data['zcfg'][$i]->id}}">{{$Data['zcfg'][$i]->title}}</a>
-							</h5>
-							<p>{{$Data['zcfg'][$i]->created_at}}</p>
-						</div>
+            </div>
+        </div>
+        <!--home intro ends-->
+        <div class="container">
+            <div class="one-third">
+                <div class="feature-block"><!-- features blocks starts -->
+                    <div class="feature-block-title">
+                        <div class="feature-block-icon">
+                            <a href="/about"><i class="icon-lightbulb"></i><span></span></a>
+                        </div>
+                        <h4><a href="/about">联系方式</a></h4>
+                        <h6>电话 &amp; 地址</h6>
+                    </div>
+                    <ul class="sidebar-nav">
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-female"></i>
+                                联系人：朱女士
+                            </a>
+                        </li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-phone"></i>
+                                手&nbsp;&nbsp;&nbsp;&nbsp;机：{{$common_data['company']->telephone}}
+                            </a>
+                        </li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-phone-sign"></i>
+                                电&nbsp;&nbsp;&nbsp;&nbsp;话：{{$common_data['company']->phone}}
+                            </a></li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-archive"></i>
+                                传&nbsp;&nbsp;&nbsp;&nbsp;真：{{$common_data['company']->telephone}}
+                            </a></li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-envelope"></i>
+                                E-mail：{{$common_data['company']->mail}}
+                            </a></li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-globe"></i>
+                                邮&nbsp;&nbsp;&nbsp;&nbsp;编：65000
+                            </a>
+                        </li>
+                        <li><a href="#" title="Some Title">
+                                <i class="icon-home"></i>
+                                地&nbsp;&nbsp;&nbsp;&nbsp;址：{{$common_data['company']->address}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="one-third">
+                <div class="feature-block">
+                    <div class="feature-block-title">
+                        <div class="feature-block-icon">
+                            <a href="/company"><i class="icon-desktop"></i><span></span></a>
+                        </div>
+                        <h4><a href="/company">公司情况</a></h4>
+                        <h6>公司简介</h6>
+                    </div>
+                    <p>
+                        <span class="dropcap gray">云</span>南悦齐劳务有限公司是云南省劳动人事就业部门隶属、监管单位，由云南省工商行政管理局批准成立，经云南省劳动和社会保障局认定，具有独立法人资格的劳务派遣公司注册，资本200万元。我公司始终秉承“以人为本，客户至上，锐意进取，追求卓越”的经营理念，坚持“专业化管理、规范化服务、职业化培训”的服务宗旨，在用工单位和劳动者之间架起了一座便捷、高效的服务桥梁，帮助用工单位规范用工，保障员工合法权益。
+                        <a href="/company" style="float: right; color: #0f79bb">详细信息</a>
+                    </p>
+                </div>
+            </div>
+            <div class="one-third">
+                <div class="feature-block">
+                    <div class="feature-block-title">
+                        <div class="feature-block-icon">
+                            <a href="/zxzx"><i class="icon-cog"></i><span></span></a>
+                        </div>
+                        <h4><a href="/zxzx">资讯中心</a></h4>
+                        <h6>公司 &amp; 行业信息</h6>
+                    </div>
+                    <ul class="accordion">
+                        @foreach($zxzxs as $zxzx)
+                        <li class="accordion-item">
+                            <div class="accordion-switch">
+                                <span class="togglegfx"></span>{{$zxzx->title}}
+                            </div>
+                            <div class="accordion-content">
+                                <p>{{$zxzx->content}}</p>
+                                <p><a href="/zxzx/{{$zxzx->id}}">详细信息</a></p>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <!--features block ends-->
+        </div>
+        <div class="intro-features"><!-- intro features panel starts -->
+            <div class="container">
+                <h4>经典案例</h4>
+                <div class="slidewrap">
+                    <!--project carousel starts-->
+                    @if(count($jdals)>4)
+                    <ul class="slider" id="sliderName">
+                        <li class="slide"><!-- carousel item starts -->
+                            @for($i=0; $i<4; $i++)
+                            <div class="one-fourth">
+                                <div class="item-wrapp">
+                                    <div class="portfolio-item">
+                                        <a href="/jdal/{{$jdals[$i]->id}}" class="item-permalink"><i class="icon-link"></i></a>
+                                        <a href="{{asset('uploads/'.$jdals[$i]->cover.'')}}" data-rel="prettyPhoto" class="item-preview"><i class="icon-zoom-in"></i></a>
+                                        <img src="{{asset('uploads/'.$jdals[$i]->cover.'')}}" alt=""/>
+                                    </div>
+                                    <div class="portfolio-item-title">
+                                        <a href="/jdal/{{$jdals[$i]->id}}">{{$jdals[$i]->title}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endfor
+                        </li>
+                        <li class="slide"><!-- carousel item starts -->
+                            @for($i; $i<count($jdals); $i++)
+                                <div class="one-fourth">
+                                    <div class="item-wrapp">
+                                        <div class="portfolio-item">
+                                            <a href="/jdal/{{$jdals[$i]->id}}" class="item-permalink"><i class="icon-link"></i></a>
+                                            <a href="{{asset('uploads/'.$jdals[$i]->cover.'')}}" data-rel="prettyPhoto" class="item-preview"><i class="icon-zoom-in"></i></a>
+                                            <img src="{{asset('uploads/'.$jdals[$i]->cover.'')}}" alt=""/>
+                                        </div>
+                                        <div class="portfolio-item-title">
+                                            <a href="/jdal/{{$jdals[$i]->id}}">{{$jdals[$i]->title}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endfor
+                        </li>
+                    </ul><!-- carousel items UL ends -->
+                    <ul class="slidecontrols">
+                        <li><a href="#sliderName" class="prev">Prev</a></li>
+                        <li><a href="#sliderName" class="next">Next</a></li>
+                    </ul>
+                    @else
+                    <ul class="slider" id="sliderName">
+                            <li class="slide"><!-- carousel item starts -->
+                                @for($i=0; $i<count($jdals); $i++)
+                                    <div class="one-fourth">
+                                        <div class="item-wrapp">
+                                            <div class="portfolio-item">
+                                                <a href="/jdal/{{$jdals[$i]->id}}" class="item-permalink"><i class="icon-link"></i></a>
+                                                <a href="{{asset('uploads/'.$jdals[$i]->cover.'')}}" data-rel="prettyPhoto" class="item-preview"><i class="icon-zoom-in"></i></a>
+                                                <img src="{{asset('uploads/'.$jdals[$i]->cover.'')}}" alt=""/>
+                                            </div>
+                                            <div class="portfolio-item-title">
+                                                <a href="/jdal/{{$jdals[$i]->id}}">{{$jdals[$i]->title}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endfor
+                            </li>
+                        </ul><!-- carousel items UL ends -->
+                    @endif
+                </div>
+            </div>
+        </div><!-- intro features panel ends -->
+        {{--<div class=" clients-wrapp">--}}
+            {{--<div class="container">--}}
+                {{--<br/>--}}
+                {{--<br/>--}}
+                {{--<h4>公司活动</h4>--}}
+                {{--<div class="flexslider clients-slider "><!-- flex slider starts -->--}}
+                    {{--<ul class="slides client-block">--}}
 
-					@if(($i+1)%2==0)
-						<div class="clearfix"> </div>
-					@endif
-					@if($i%2==0)
-						</div>
-					@endif
-				@endfor
-
-
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<!-- //services -->
-<!--banner-bottom-->
-<div class="banner-bottom">
-	<div class="container">
-		<h3 class="title">党群工作建设</h3>
-		<div class="banner-bottom-grids">
-			@for($i=0; $i<count($Data['gzjs']); $i++)
-				<div class="col-md-3 banner-bottom-grid">
-					<div class="banner-bottom-grid-rel">
-						<p class="welcome-bg-text">0.{{$i+1}}</p>
-						<div class="banner-bottom-grid-rel-pos">
-							<h4>
-								<a class="trip-text" href="/gzjs/{{$Data['gzjs'][$i]->id}}">{{$Data['gzjs'][$i]->title}}</a>
-							</h4>
-
-							<p>{{$Data['gzjs'][$i]->author}}</p>
-							<p>{{$Data['gzjs'][$i]->created_at}}</p>
-						</div>
-					</div>
-				</div>
-			@endfor
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<!--//banner-bottom-->
-<!--trip-->
-<div class="trip">
-	<div class="container">
-		<h3 class="title">招聘信息</h3>
-		<div class="trip-info">
-			<div class="col-md-6 trip-left">
-				<div class="grid_3 grid_5">
-					<div class="alert alert-success" role="alert">
-						<h4>
-							<a class="trip-text" href="/zpxx/{{$Data['zpxx'][0]->id}}">{{$Data['zpxx'][0]->title}}</a>
-						</h4>
-						<p>{{$Data['zpxx'][0]->author}}</p>
-						<p>{{$Data['zpxx'][0]->created_at}}</p>
-					</div>
-					<div class="alert alert-info" role="alert">
-						<h4>
-							<a class="trip-text" href="/zpxx/{{$Data['zpxx'][1]->id}}">{{$Data['zpxx'][1]->title}}</a>
-						</h4>
-						<p>{{$Data['zpxx'][1]->author}}</p>
-						<p>{{$Data['zpxx'][1]->created_at}}</p>					</div>
-					<div class="alert alert-warning" role="alert">
-						<h4>
-							<a class="trip-text" href="/fwdt/{{$Data['zpxx'][2]->id}}">{{$Data['zpxx'][2]->title}}</a>
-						</h4>
-						<p>{{$Data['zpxx'][2]->author}}</p>
-						<p>{{$Data['zpxx'][2]->created_at}}</p>					</div>
-					<div class="alert alert-danger" role="alert">
-						<h4>
-							<a class="trip-text" href="/zpxx/{{$Data['zpxx'][3]->id}}">{{$Data['zpxx'][3]->title}}</a>
-						</h4>
-						<p>{{$Data['zpxx'][3]->author}}</p>
-						<p>{{$Data['zpxx'][3]->created_at}}</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 trip-right">
-				<div class="border">
-					<img src="{{asset('images/index_zpxx.jpg')}}" height="300" width="300" alt=""/>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<!--//about-grid-->
-	{{--<!--trip-->--}}
-	{{--<div class="trip">--}}
-		{{--<div class="container">--}}
-			{{--<h3 class="title">招聘信息</h3>--}}
-			{{--<div class="trip-info">--}}
-				{{--<div class="trip-info">--}}
-					{{--@for($i=0; $i<count($Data['rlzy']); $i++)--}}
-						{{--<div class="col-md-2 trip-left">--}}
-							{{--<h3>--}}
-								{{--<a class="trip-text" href="/rlzy/{{$Data['rlzy'][$i]->id}}">{{$Data['rlzy'][$i]->title}}</a>--}}
-							{{--</h3>--}}
-							{{--<p>{{$Data['rlzy'][$i]->author}}</p>--}}
-							{{--<img src="{{asset(''.$Data['rlzy'][$i]->cover.'')}}" height="100" width="100" alt=""/>--}}
-						{{--</div>--}}
-					{{--@endfor--}}
-					{{--<div class="col-md-3 trip-right">--}}
-						{{--<div class="border">--}}
-							{{--<img src="{{asset('images/img1.jpg')}}" alt=""/>--}}
-						{{--</div>--}}
-					{{--</div>--}}
-					{{--<div class="clearfix"> </div>--}}
-				{{--</div>--}}
-
-			{{--</div>--}}
-		{{--</div>--}}
-	{{--</div>--}}
-	{{--<!--banner-bottom-->--}}
-	<div class="banner-bottom">
-		<div class="container">
-			<h3 class="title">服务动态</h3>
-			<div class="banner-bottom-grids">
-				@for($i=0; $i<count($Data['fwdt']); $i++)
-					<div class="col-md-3 banner-bottom-grid">
-						<div class="banner-bottom-grid-rel">
-							<p class="welcome-bg-text">0.{{$i+1}}</p>
-							<div class="banner-bottom-grid-rel-pos">
-								<h4>
-								<a class="trip-text" href="/fwdt/{{$Data['fwdt'][$i]->id}}">{{$Data['fwdt'][$i]->title}}</a>
-								</h4>
-								<p>{{$Data['fwdt'][$i]->author}}</p>
-								<p>{{$Data['fwdt'][$i]->created_at}}</p>
-							</div>
-						</div>
-					</div>
-				@endfor
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!--//banner-bottom-->
-
-	<div class="copyrights"></div>
-	<!--trip-gallery-->
-	<div class="trip-gallery">
-		<div class="col-md-4 trip-grids">
-			<div class="trip-grid-text">
-				<h4>Mountains </h4>
-				<p>Like Aldus PageMaker versions</p>
-			</div>
-		</div>
-		<div class="col-md-4 trip-grids trip-grid2">
-			<div class="trip-grid-text">
-				<h4>Waterfalls</h4>
-				<p>Like Aldus PageMaker versions</p>
-			</div>
-		</div>
-		<div class="col-md-4 trip-grids trip-grid3">
-			<div class="trip-grid-text">
-				<h4>Hill Stations</h4>
-				<p>Like Aldus PageMaker versions</p>
-			</div>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-	<!--//trip-gallery-->
+                        {{--<li>--}}
+                            {{--@for($j=0; $j<count($gshds); $j++)--}}
+                            {{--<div class="one-fifth">--}}
+                                {{--<a href="#" class="tooltip" title="Some Clients Name"><img src="{{asset('/uploads/ActivePic/'.$gshds[$j])}}" alt=""/></a>--}}
+                            {{--</div>--}}
+                            {{--@endfor--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div><!-- flex slider ends -->--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    </div>
 @endsection
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-@section('scripts')
-    <script src="{{asset('Front_js/bootstrap.js')}}"></script>
+
+@section('footer')
+    @parent
 @endsection
+
+@section('sidebar')
+    @parent
+@endsection
+
+@section('copyright')
+    @parent
+@show

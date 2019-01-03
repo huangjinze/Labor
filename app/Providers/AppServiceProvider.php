@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider

@@ -1,57 +1,66 @@
+
 @extends('layouts.app')
 
-@section('css')
-@parent
-@endsection
-
-@section('sidebar')
-@parent
-@endsection
-
 @section('header')
+	@parent
+@endsection
+
+@section('JavaScript')
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=AI8oThDcKfw9wtZGiL0lf4TP5A1d4FtZ&services=&t=20180917142401"></script>
+@endsection
+
+@section('layerslider')
+	@parent
 @endsection
 
 @section('content')
-
-	<!--banner-->
-<div class="banner">
-	<div class="banner-left about-banner-left">
-		<div class="logo">
-			<h1><a href="/">{{$company->name}}</a></h1>
-			<h2><img src="{{asset('uploads/'.$company->logo.'')}}" height="50" width="50" alt=""/> {{$company->en_name}}</h2>
-		</div>
-	</div>
-	<div class="banner-right about-banner-right">
-		<div class="banner-image">
-		</div>
-
-	</div>
-	<div class="clearfix"> </div>
-</div>
-	<!--//banner-->
-	<!--about-->
-	<div style="background: floralwhite; ">
-		<div class="container">
-				<div class="col-md-12 about-grids">
-					<div class="codes">
-						<div class="col-md-6 latest-news-grid">
-							<h4 class="hdg">作者：{{$company->charger}}</h4>
-						</div>
-						<div class="col-md-6 ">
-							<h4 class="hdg" style="float: right">时间：{{$company->created_at}}</h4>
-						</div>
-						<div class="well">
-							{!! $company->content !!}
-						</div>
-					</div>
+	<div id="content">
+		<div id="breadcrumb"><!-- breadcrumb starts-->
+			<div class="container">
 			</div>
+		</div><!--breadcrumbs ends -->
+		<div class="container">
+			<div class="one-fourth sidebar right">
+                @include('layouts.introduce-side')
+                @include('layouts.contact-way-side')
+			</div>
+			<div class="three-fourth">
+				<h4>{{$common_data['company']->name}}</h4>
+                <p>
+                    联系人：朱女士
+                </p>
+				<p>
+                    电&nbsp;&nbsp;&nbsp;&nbsp;话：{{$common_data['company']->phone}}
+                </p>
+				<p>
+                    地&nbsp;&nbsp;&nbsp;&nbsp;址：{{$common_data['company']->address}}
+				</p>
+
+                <div id="map-container" style="height: 300px; width: 500px;"></div>
+                <script>
+                    var map = new BMap.Map("map-container");
+                    var point = new BMap.Point(102.712021,25.00007);
+                    map.centerAndZoom(point, 20);
+                    map.setZoom(16);
+                    map.enableScrollWheelZoom(true);
+                    var marker = new BMap.Marker(point);        // 创建标注
+                    map.addOverlay(marker);                     // 将标注添加到地图中
+                    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+                </script>
+            </div>
 		</div>
 	</div>
+@endsection
 
+@section('footer')
+	@parent
 @endsection
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-@section('scripts')
-	<script src="{{asset('Front_js/bootstrap.js')}}"></script>
+
+@section('sidebar')
+	@parent
 @endsection
+
+@section('copyright')
+	@parent
+@show
